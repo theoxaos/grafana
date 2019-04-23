@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
+
 	"github.com/grafana/grafana/pkg/cmd/grafana-cli/logger"
 	m "github.com/grafana/grafana/pkg/cmd/grafana-cli/models"
 	s "github.com/grafana/grafana/pkg/cmd/grafana-cli/services"
@@ -166,7 +167,7 @@ func extractFiles(body []byte, pluginName string, filePath string) error {
 		newFile := path.Join(filePath, RemoveGitBuildFromName(pluginName, zf.Name))
 
 		if zf.FileInfo().IsDir() {
-			err := os.Mkdir(newFile, 0777)
+			err := os.Mkdir(newFile, 0750)
 			if permissionsError(err) {
 				return fmt.Errorf(permissionsDeniedMessage, newFile)
 			}
